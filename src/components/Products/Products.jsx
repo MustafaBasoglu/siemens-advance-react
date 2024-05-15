@@ -1,3 +1,4 @@
+import NewProductForm from "./NewProductForm";
 import ProductItem from "./ProductItem";
 import "./Products.css";
 
@@ -23,10 +24,10 @@ const productsData = [
 ];
 
 function Products() {
-
   return (
     <div className="products-wrapper">
       <h1>Products Component</h1>
+      <NewProductForm />
       <div className="products">
         {productsData.map((product) => (
           <ProductItem
