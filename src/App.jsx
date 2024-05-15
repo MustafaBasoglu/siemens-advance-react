@@ -1,16 +1,26 @@
-import Products from "./components/Products/Products";
+import { useState } from "react";
 
 function App() {
-  function handleClick(name) {
-    console.log(name);
+  const [name, setName] = useState("Emin Başbayan");
+
+  // let name = "Emin Başbayan";
+
+  function handleNameChange() {
+    // name = "Ali";
+    setName("Ali");
   }
 
   return (
     <div className="app">
-      <Products />
-      <button onClick={() => handleClick("Emin Başbayan")}>Click!</button>
+      <p>{name}</p>
+      <button onClick={handleNameChange}>Click!</button>
     </div>
   );
 }
 
 export default App;
+
+/* 
+1- Ekranda değişikliği göstermek istiyorsak ilgili componentin state'ini değiştirmemiz gerekiyor.
+2- Componentin re-render işlemi için state ve props değişmesi lazım.
+*/
