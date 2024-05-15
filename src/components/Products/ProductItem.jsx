@@ -1,9 +1,7 @@
 import "./ProductItem.css";
 
 function ProductItem(props) {
-  const image = props.imageLink;
-  const title = props.title;
-  const price = props.price;
+  const { imageLink: image, title, price } = props;
 
   return (
     <div className="product-item">
