@@ -1,0 +1,21 @@
+.product-item {
+  border: 1px solid #eee;
+  display: inline-flex;
+  flex-direction: column;
+}
+
+.product-image{
+    display: flex;
+}
+
+.product-image img {
+  width: 100%;
+  height: 112px;
+  object-fit: cover;
+}
+
+.product-info {
+  display: flex;
+  flex-direction: column;
+  padding: 6px;
+}
