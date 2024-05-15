@@ -27,6 +27,11 @@ const productsData = [
 function Products() {
   const [products, setProducts] = useState(productsData);
 
+  function handleDeleteProduct(id) {
+    const filteredProducts = products.filter((product) => product.id !== id);
+    setProducts(filteredProducts);
+  }
+
   return (
     <div className="products-wrapper">
       <h1>Products Component</h1>
@@ -38,6 +43,8 @@ function Products() {
             imageLink={product.image}
             title={product.title}
             price={product.price}
+            handleDeleteProduct={handleDeleteProduct}
+            id={product.id}
           />
         ))}
       </div>

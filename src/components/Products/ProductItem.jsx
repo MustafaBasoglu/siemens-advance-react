@@ -1,14 +1,9 @@
-import { useState } from "react";
 import PropTypes from "prop-types";
 import "./ProductItem.css";
+import Button from "../UI/Button";
 
 function ProductItem(props) {
-  const { imageLink: image, title: pTitle, price } = props;
-  const [title, setTitle] = useState(pTitle);
-
-  function handleTitleChange() {
-    setTitle("Title Changed!");
-  }
+  const { id, imageLink: image, title, price, handleDeleteProduct } = props;
 
   return (
     <div className="product-item">
@@ -18,7 +13,13 @@ function ProductItem(props) {
       <div className="product-info">
         <strong>{title}</strong>
         <span>{price}₺</span>
-        <button onClick={handleTitleChange}>Title Change</button>
+        <Button
+          className={"mt-[2px]"}
+          background={"danger"}
+          onClick={() => handleDeleteProduct(id)}
+        >
+          Delete
+        </Button>
       </div>
     </div>
   );
@@ -28,6 +29,8 @@ ProductItem.propTypes = {
   imageLink: PropTypes.string,
   title: PropTypes.string,
   price: PropTypes.number,
+  id: PropTypes.number,
+  handleDeleteProduct: PropTypes.func,
 };
 
 export default ProductItem;

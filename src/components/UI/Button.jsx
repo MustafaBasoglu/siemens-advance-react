@@ -6,16 +6,7 @@ function Button(props) {
   const backgroundClass = `btn-${props.background}`;
   const classes = `${sizeClass} ${backgroundClass} ${props.className}`;
 
-  return (
-    <button
-      className={classes}
-      style={{
-        backgroundColor: "purple",
-      }}
-    >
-      {props.children}
-    </button>
-  );
+  return <button className={classes} onClick={props.onClick}>{props.children}</button>;
 }
 
 Button.propTypes = {
@@ -24,6 +15,7 @@ Button.propTypes = {
   size: PropTypes.string,
   background: PropTypes.string,
   className: PropTypes.string,
+  onClick: PropTypes.func,
 };
 
 export default Button;
