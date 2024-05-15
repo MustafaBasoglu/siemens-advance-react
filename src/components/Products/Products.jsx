@@ -1,3 +1,4 @@
+import { useState } from "react";
 import NewProductForm from "./NewProductForm";
 import ProductItem from "./ProductItem";
 import "./Products.css";
@@ -24,12 +25,14 @@ const productsData = [
 ];
 
 function Products() {
+  const [products, setProducts] = useState(productsData);
+
   return (
     <div className="products-wrapper">
       <h1>Products Component</h1>
-      <NewProductForm />
+      <NewProductForm products={products} setProducts={setProducts} />
       <div className="products">
-        {productsData.map((product) => (
+        {products.map((product) => (
           <ProductItem
             key={product.id}
             imageLink={product.image}
