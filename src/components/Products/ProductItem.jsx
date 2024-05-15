@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import "./ProductItem.css";
 
 function ProductItem(props) {
@@ -14,6 +15,12 @@ function ProductItem(props) {
       </div>
     </div>
   );
+}
+
+ProductItem.propTypes = {
+  imageLink: PropTypes.string,
+  title: PropTypes.string,
+  price: PropTypes.number,
 }
 
 export default ProductItem;
