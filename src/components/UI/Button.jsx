@@ -6,7 +6,16 @@ function Button(props) {
   const backgroundClass = `btn-${props.background}`;
   const classes = `${sizeClass} ${backgroundClass} ${props.className}`;
 
-  return <button className={classes}>{props.children}</button>;
+  return (
+    <button
+      className={classes}
+      style={{
+        backgroundColor: "purple",
+      }}
+    >
+      {props.children}
+    </button>
+  );
 }
 
 Button.propTypes = {
