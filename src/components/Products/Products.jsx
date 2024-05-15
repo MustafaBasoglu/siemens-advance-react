@@ -35,7 +35,7 @@ function Products() {
   return (
     <div className="products-wrapper">
       <h1>Products Component</h1>
-      <NewProductForm products={products} setProducts={setProducts} />
+      <NewProductForm setProducts={setProducts} />
       <div className="products">
         {products.map((product) => (
           <ProductItem

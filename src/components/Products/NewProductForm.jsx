@@ -9,7 +9,7 @@ const initialValues = {
   price: 0,
 };
 
-const NewProductForm = ({ products, setProducts }) => {
+const NewProductForm = ({ setProducts }) => {
   const [productInputs, setProductInputs] = useState(initialValues);
 
   function handleInputChange(event) {
@@ -30,7 +30,7 @@ const NewProductForm = ({ products, setProducts }) => {
     );
 
     if (!isFormValid) {
-      toast.warn("Bu inputlar dolu olmalıdır!")
+      toast.warn("Bu inputlar dolu olmalıdır!");
       return;
     }
 
@@ -41,7 +41,7 @@ const NewProductForm = ({ products, setProducts }) => {
       price: Number(price),
     };
 
-    setProducts([newProduct, ...products]);
+    setProducts((prevState) => [newProduct, ...prevState]);
 
     setProductInputs(initialValues);
   }
@@ -112,7 +112,6 @@ const NewProductForm = ({ products, setProducts }) => {
 
 NewProductForm.propTypes = {
   setProducts: PropTypes.func,
-  products: PropTypes.array,
 };
 
 export default NewProductForm;
