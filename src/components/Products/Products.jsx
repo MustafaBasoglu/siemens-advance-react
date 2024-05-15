@@ -3,38 +3,24 @@ import NewProductForm from "./NewProductForm";
 import ProductItem from "./ProductItem";
 import "./Products.css";
 
-const productsData = [
-  {
-    id: 1,
-    title: "Soda",
-    price: 100,
-    image: "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
-  },
-  {
-    id: 2,
-    title: "Tişört",
-    price: 500,
-    image: "https://fakestoreapi.com/img/71li-ujtlUL._AC_UX679_.jpg",
-  },
-  {
-    id: 3,
-    title: "Ayakkabı",
-    price: 600,
-    image: "https://fakestoreapi.com/img/71YXzeOuslL._AC_UY879_.jpg",
-  },
-];
-
 function Products() {
-  const [products, setProducts] = useState(productsData);
+  const [products, setProducts] = useState([]);
 
   function handleDeleteProduct(id) {
     const filteredProducts = products.filter((product) => product.id !== id);
     setProducts(filteredProducts);
   }
 
+  function fetchProducts() {
+    fetch("https://fakestoreapi.com/products/")
+      .then((res) => res.json())
+      .then((data) => setProducts(data));
+  }
+
   return (
     <div className="products-wrapper">
       <h1>Products Component</h1>
+      <button onClick={fetchProducts}>Ürünleri Getir</button>
       <NewProductForm setProducts={setProducts} />
       <div className="products">
         {products.map((product) => (

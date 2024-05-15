@@ -11,7 +11,7 @@ function ProductItem(props) {
         <img src={image} alt="tişört" />
       </div>
       <div className="product-info">
-        <strong>{title}</strong>
+        <strong>{title.slice(0, 10)}...</strong>
         <span>{price}₺</span>
         <Button
           className={"mt-[2px]"}
