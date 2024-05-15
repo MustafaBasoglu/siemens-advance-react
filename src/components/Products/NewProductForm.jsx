@@ -3,33 +3,31 @@ import PropTypes from "prop-types";
 import { useState } from "react";
 
 const NewProductForm = ({ products, setProducts }) => {
-  const [title, setTitle] = useState("");
-  const [image, setImage] = useState("");
-  const [price, setPrice] = useState(0);
+  const [productInputs, setProductInputs] = useState({
+    title: "",
+    image: "",
+    price: 0,
+  });
 
-  function handleTitleChange(event) {
-    const title = event.target.value;
-    setTitle(title);
-  }
+  function handleInputChange(event) {
+    const { name, value } = event.target;
 
-  function handleImageChange(event) {
-    const image = event.target.value;
-    setImage(image);
-  }
-
-  function handlePriceChange(event) {
-    const price = event.target.value;
-    setPrice(price);
+    setProductInputs({
+      ...productInputs,
+      [name]: value,
+    });
   }
 
   function handleSubmit(event) {
     event.preventDefault();
+
     const newProduct = {
       id: Math.random(),
-      title,
-      image,
-      price: Number(price),
+      title: productInputs.title,
+      image: productInputs.image,
+      price: Number(productInputs.price),
     };
+
     setProducts([newProduct, ...products]);
   }
 
@@ -51,7 +49,8 @@ const NewProductForm = ({ products, setProducts }) => {
             id="title"
             type="text"
             placeholder="Title"
-            onChange={handleTitleChange}
+            name="title"
+            onChange={handleInputChange}
           />
         </div>
         <div className="mb-4">
@@ -63,7 +62,8 @@ const NewProductForm = ({ products, setProducts }) => {
             id="image"
             type="text"
             placeholder="Image"
-            onChange={handleImageChange}
+            name="image"
+            onChange={handleInputChange}
           />
         </div>
         <div className="mb-4">
@@ -75,7 +75,8 @@ const NewProductForm = ({ products, setProducts }) => {
             id="price"
             type="number"
             placeholder="Price"
-            onChange={handlePriceChange}
+            name="price"
+            onChange={handleInputChange}
           />
         </div>
         <div className="flex items-center justify-between">
