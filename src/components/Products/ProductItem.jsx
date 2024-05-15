@@ -1,12 +1,9 @@
 import "./ProductItem.css";
 
-function ProductItem() {
-  const image =
-    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSdZRDVij3RuXMIOrulPp9Z7CsEryJV8yeCIg&usqp=CAU";
-
-  const title = "Soda";
-  
-  const price = 500;
+function ProductItem(props) {
+  const image = props.imageLink;
+  const title = props.title;
+  const price = props.price;
 
   return (
     <div className="product-item">
