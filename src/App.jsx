@@ -6,12 +6,12 @@ function App() {
     <div className="app">
       <Products />
       <br />
-      <Button addClass={"btn-primary"}>
+      <Button background={"primary"} size={"sm"} className={"hidden"}>
         <strong>Update</strong>
       </Button>
-      <br />
-      <br />
-      <Button addClass={"btn-danger"}>Delete</Button>
+      <Button background={"danger"} size={"lg"}>
+        <strong>Delete</strong>
+      </Button>
     </div>
   );
 }
