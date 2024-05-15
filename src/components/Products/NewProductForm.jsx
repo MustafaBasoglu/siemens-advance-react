@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
 
 import { useState } from "react";
+import { toast } from "react-toastify";
 
 const initialValues = {
   title: "",
@@ -22,12 +23,22 @@ const NewProductForm = ({ products, setProducts }) => {
 
   function handleSubmit(event) {
     event.preventDefault();
+    const { title, image, price } = productInputs;
+
+    const isFormValid = Object.values(productInputs).every(
+      (value) => value.trim() !== ""
+    );
+
+    if (!isFormValid) {
+      toast.warn("Bu inputlar dolu olmalıdır!")
+      return;
+    }
 
     const newProduct = {
       id: Math.random(),
-      title: productInputs.title,
-      image: productInputs.image,
-      price: Number(productInputs.price),
+      title: title,
+      image: image,
+      price: Number(price),
     };
 
     setProducts([newProduct, ...products]);
