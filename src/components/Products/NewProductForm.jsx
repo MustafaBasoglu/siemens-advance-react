@@ -2,12 +2,14 @@ import PropTypes from "prop-types";
 
 import { useState } from "react";
 
+const initialValues = {
+  title: "",
+  image: "",
+  price: 0,
+};
+
 const NewProductForm = ({ products, setProducts }) => {
-  const [productInputs, setProductInputs] = useState({
-    title: "",
-    image: "",
-    price: 0,
-  });
+  const [productInputs, setProductInputs] = useState(initialValues);
 
   function handleInputChange(event) {
     const { name, value } = event.target;
@@ -29,6 +31,8 @@ const NewProductForm = ({ products, setProducts }) => {
     };
 
     setProducts([newProduct, ...products]);
+
+    setProductInputs(initialValues);
   }
 
   return (
@@ -50,6 +54,7 @@ const NewProductForm = ({ products, setProducts }) => {
             type="text"
             placeholder="Title"
             name="title"
+            value={productInputs.title}
             onChange={handleInputChange}
           />
         </div>
@@ -63,6 +68,7 @@ const NewProductForm = ({ products, setProducts }) => {
             type="text"
             placeholder="Image"
             name="image"
+            value={productInputs.image}
             onChange={handleInputChange}
           />
         </div>
@@ -76,6 +82,7 @@ const NewProductForm = ({ products, setProducts }) => {
             type="number"
             placeholder="Price"
             name="price"
+            value={productInputs.price}
             onChange={handleInputChange}
           />
         </div>
