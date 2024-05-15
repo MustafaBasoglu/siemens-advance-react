@@ -1,19 +1,9 @@
-import { useState } from "react";
+import Products from "./components/Products/Products";
 
 function App() {
-  const [name, setName] = useState("Emin Başbayan");
-
-  // let name = "Emin Başbayan";
-
-  function handleNameChange() {
-    // name = "Ali";
-    setName("Ali");
-  }
-
   return (
     <div className="app">
-      <p>{name}</p>
-      <button onClick={handleNameChange}>Click!</button>
+      <Products />
     </div>
   );
 }

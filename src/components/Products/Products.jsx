@@ -23,6 +23,7 @@ const productsData = [
 ];
 
 function Products() {
+
   return (
     <div className="products-wrapper">
       <h1>Products Component</h1>
