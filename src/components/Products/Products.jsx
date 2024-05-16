@@ -1,42 +1,20 @@
-import { useEffect, useState } from "react";
-import NewProductForm from "./NewProductForm";
+import { useState } from "react";
+import PropTypes from "prop-types";
+// import NewProductForm from "./NewProductForm";
 import ProductItem from "./ProductItem";
 import "./Products.css";
-import Spinner from "../UI/Spinner";
 
-function Products() {
-  const [products, setProducts] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
+function Products({ data }) {
+  const [products, setProducts] = useState(data.products);
 
   function handleDeleteProduct(id) {
     const filteredProducts = products.filter((product) => product.id !== id);
     setProducts(filteredProducts);
   }
 
-  async function fetchProducts() {
-    setIsLoading(true);
-    setProducts([]);
-    try {
-      const res = await fetch("https://dummyjson.com/products");
-      const data = await res.json();
-      setProducts(data.products);
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setIsLoading(false);
-    }
-  }
-
-  useEffect(() => {
-    fetchProducts();
-  }, []);
-
   return (
     <div className="products-wrapper">
-      <h1>Products Component</h1>
-      <button onClick={fetchProducts}>Ürünleri Getir</button>
-      <NewProductForm setProducts={setProducts} />
-      {isLoading && <Spinner />}
+      {/* <NewProductForm setProducts={setProducts} /> */}
       <div className="products">
         {products.map((product) => (
           <ProductItem
@@ -52,5 +30,9 @@ function Products() {
     </div>
   );
 }
+
+Products.propTypes = {
+  data: PropTypes.object,
+};
 
 export default Products;
