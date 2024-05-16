@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import NewProductForm from "./NewProductForm";
 import ProductItem from "./ProductItem";
 import "./Products.css";
 
 function Products() {
   const [products, setProducts] = useState([]);
+  const [name, setName] = useState("Emin Başbayan");
 
   function handleDeleteProduct(id) {
     const filteredProducts = products.filter((product) => product.id !== id);
@@ -18,14 +19,25 @@ function Products() {
       setProducts(data.products);
     } catch (error) {
       console.error(error);
-    } finally {
-      console.log("İşlem tamamlandı!");
     }
   }
+
+  // component ilk yüklendiğinde (mount)
+  useEffect(() => {
+    fetchProducts();
+    document.querySelector(".products").innerHTML = "";
+  }, []);
+
+  // component ilk yüklendiğinde ve update olduğunda
+  useEffect(() => {
+    console.log("component update olduğunda!");
+  }, [name]);
 
   return (
     <div className="products-wrapper">
       <h1>Products Component</h1>
+      <p>{name}</p>
+      <button onClick={() => setName("Ahmet")}>Title Change</button>
       <button onClick={fetchProducts}>Ürünleri Getir</button>
       <NewProductForm setProducts={setProducts} />
       <div className="products">
