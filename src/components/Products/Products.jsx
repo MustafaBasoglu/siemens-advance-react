@@ -12,9 +12,22 @@ function Products() {
   }
 
   function fetchProducts() {
-    fetch("https://fakestoreapi.com/products/")
-      .then((res) => res.json())
-      .then((data) => setProducts(data));
+    const myPromise = new Promise((resolve, reject) => {
+      let success = true;
+
+      if (success) {
+        resolve([1, 2]);
+      } else {
+        reject("İşlem başarısız!");
+      }
+    });
+
+    myPromise
+      .then((value) => {
+        return [...value, 12];
+      })
+      .then((value) => console.log(value))
+      .catch((err) => console.log(err));
   }
 
   return (
