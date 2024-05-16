@@ -1,9 +1,6 @@
-import Header from "../components/Layout/Header";
-
 const LoginPage = () => {
   return (
     <div className="login-page">
-      <Header />
       <form className="max-w-sm mx-auto">
         <div className="mb-5">
           <label
