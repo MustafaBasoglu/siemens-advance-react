@@ -4,6 +4,7 @@ import ProductsPage from "./pages/ProductsPage";
 import HomePage from "./pages/HomePage";
 import "react-toastify/dist/ReactToastify.css";
 import AboutPage from "./pages/AboutPage";
+import LoginPage from "./pages/LoginPage";
 
 function App() {
   const router = createBrowserRouter([
@@ -18,6 +19,10 @@ function App() {
     {
       path: "/about",
       element: <AboutPage />,
+    },
+    {
+      path: "/login",
+      element: <LoginPage />,
     },
   ]);
   return (
