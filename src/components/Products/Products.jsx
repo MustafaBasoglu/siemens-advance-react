@@ -11,23 +11,16 @@ function Products() {
     setProducts(filteredProducts);
   }
 
-  function fetchProducts() {
-    const myPromise = new Promise((resolve, reject) => {
-      let success = true;
-
-      if (success) {
-        resolve([1, 2]);
-      } else {
-        reject("İşlem başarısız!");
-      }
-    });
-
-    myPromise
-      .then((value) => {
-        return [...value, 12];
-      })
-      .then((value) => console.log(value))
-      .catch((err) => console.log(err));
+  async function fetchProducts() {
+    try {
+      const res = await fetch("https://dummyjson.com/products");
+      const data = await res.json();
+      console.log(data);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      console.log("İşlem tamamlandı!");
+    }
   }
 
   return (
