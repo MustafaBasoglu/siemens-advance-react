@@ -1,4 +1,5 @@
 import { useFormik } from "formik";
+import * as Yup from "yup";
 
 const LoginPage = () => {
   const formik = useFormik({
@@ -6,12 +7,20 @@ const LoginPage = () => {
       email: "",
       password: "",
     },
+    validationSchema: Yup.object({
+      email: Yup.string()
+        .required("Zorunlu Alan!")
+        .email("Geçerli bir e-mail giriniz!"),
+      password: Yup.string()
+        .required("Zorunlu Alan!")
+        .min(6, "Şifre en az 6 karakter olmalı!"),
+    }),
     onSubmit: (values) => {
-      console.log(values);
+      alert(JSON.stringify(values, null, 2));
       formik.resetForm();
     },
   });
-  
+
   return (
     <div className="login-page">
       <form className="max-w-sm mx-auto" onSubmit={formik.handleSubmit}>
@@ -28,10 +37,13 @@ const LoginPage = () => {
             name="email"
             className={loginClasses}
             placeholder="name@flowbite.com"
-            required
             onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
             value={formik.values.email}
           />
+          {formik.touched.email && formik.errors.email && (
+            <small className="text-red-600">{formik.errors.email}</small>
+          )}
         </div>
         <div className="mb-5">
           <label
@@ -45,10 +57,13 @@ const LoginPage = () => {
             name="password"
             id="password"
             className={loginClasses}
-            required
             onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
             value={formik.values.password}
           />
+          {formik.touched.password && formik.errors.password && (
+            <small className="text-red-600">{formik.errors.password}</small>
+          )}
         </div>
         <button
           type="submit"
