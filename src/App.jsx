@@ -3,6 +3,7 @@ import { ToastContainer } from "react-toastify";
 import ProductsPage from "./pages/ProductsPage";
 import HomePage from "./pages/HomePage";
 import "react-toastify/dist/ReactToastify.css";
+import Header from "./components/Layout/Header";
 
 function App() {
   const router = createBrowserRouter([
@@ -17,6 +18,7 @@ function App() {
   ]);
   return (
     <div className="app">
+      <Header />
       <RouterProvider router={router} />
       <ToastContainer />
     </div>
