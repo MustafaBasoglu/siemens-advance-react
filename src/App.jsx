@@ -1,12 +1,18 @@
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
-import Products from "./components/Products/Products";
+import HomePage from "./pages/HomePage";
 import "react-toastify/dist/ReactToastify.css";
 
 function App() {
-
+     const router = createBrowserRouter([
+      {
+         path: "/",
+         element: <HomePage />
+      }
+     ]);
   return (
     <div className="app">
-      <Products />
+      <RouterProvider router={router}  />
       <ToastContainer />
     </div>
   );
