@@ -6,6 +6,8 @@ import "./Products.css";
 
 function Products({ data }) {
   const [products, setProducts] = useState(data.products);
+  const [cart, setCart] = useState([]);
+
 
   function handleDeleteProduct(id) {
     const filteredProducts = products.filter((product) => product.id !== id);
@@ -22,6 +24,8 @@ function Products({ data }) {
             imageLink={product.images[0]}
             title={product.title}
             price={product.price}
+            products={products}
+            setCart={setCart}
             handleDeleteProduct={handleDeleteProduct}
             id={product.id}
           />

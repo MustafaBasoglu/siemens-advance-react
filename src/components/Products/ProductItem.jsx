@@ -4,8 +4,26 @@ import Button from "../UI/Button";
 import "./ProductItem.css";
 
 function ProductItem(props) {
-  const { id, imageLink: image, title, price, handleDeleteProduct } = props;
+  const {
+    id,
+    imageLink: image,
+    title,
+    price,
+    handleDeleteProduct,
+    setCart,
+  } = props;
   const navigate = useNavigate();
+
+  function addToCart() {
+    const cartItem = {
+      id: Math.random(),
+      image,
+      title,
+      price,
+    };
+
+    setCart((cart) => [cartItem, ...cart]);
+  }
 
   return (
     <div className="product-item">
@@ -22,7 +40,16 @@ function ProductItem(props) {
         <span>{price}₺</span>
         <Button
           className={"mt-[2px]"}
+          background={"primary"}
+          size={"sm"}
+          onClick={addToCart}
+        >
+          Add To Cart
+        </Button>
+        <Button
+          className={"mt-[2px]"}
           background={"danger"}
+          size={"sm"}
           onClick={() => handleDeleteProduct(id)}
         >
           Delete
@@ -38,6 +65,7 @@ ProductItem.propTypes = {
   price: PropTypes.number,
   id: PropTypes.number,
   handleDeleteProduct: PropTypes.func,
+  setCart: PropTypes.func,
 };
 
 export default ProductItem;
