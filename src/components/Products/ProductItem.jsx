@@ -1,9 +1,11 @@
 import PropTypes from "prop-types";
-import "./ProductItem.css";
+import { useNavigate } from "react-router-dom";
 import Button from "../UI/Button";
+import "./ProductItem.css";
 
 function ProductItem(props) {
   const { id, imageLink: image, title, price, handleDeleteProduct } = props;
+  const navigate = useNavigate();
 
   return (
     <div className="product-item">
@@ -11,7 +13,12 @@ function ProductItem(props) {
         <img src={image} alt="tişört" />
       </div>
       <div className="product-info">
-        <strong>{title.slice(0, 10)}...</strong>
+        <strong
+          className="cursor-pointer"
+          onClick={() => navigate(`/products/${id}`)}
+        >
+          {title.slice(0, 30)}
+        </strong>
         <span>{price}₺</span>
         <Button
           className={"mt-[2px]"}
