@@ -3,7 +3,6 @@ import { ToastContainer } from "react-toastify";
 import ProductsPage from "./pages/ProductsPage";
 import HomePage from "./pages/HomePage";
 import "react-toastify/dist/ReactToastify.css";
-import Header from "./components/Layout/Header";
 import AboutPage from "./pages/AboutPage";
 
 function App() {
@@ -23,7 +22,6 @@ function App() {
   ]);
   return (
     <div className="app">
-      <Header />
       <RouterProvider router={router} />
       <ToastContainer />
     </div>
