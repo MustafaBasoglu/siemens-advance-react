@@ -2,6 +2,8 @@ import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
 import Button from "../UI/Button";
 import "./ProductItem.css";
+import { useContext } from "react";
+import { CartContext } from "../../context/cart/CartContext";
 
 function ProductItem(props) {
   const {
@@ -10,19 +12,22 @@ function ProductItem(props) {
     title,
     price,
     handleDeleteProduct,
-    setCart,
+    cartPage,
+    quantity,
   } = props;
   const navigate = useNavigate();
+  const { addToCartHandler } = useContext(CartContext);
+  const { removeFromCart } = useContext(CartContext);
 
   function addToCart() {
     const cartItem = {
-      id: Math.random(),
+      id,
       image,
       title,
       price,
     };
 
-    setCart((cart) => [cartItem, ...cart]);
+    addToCartHandler(cartItem);
   }
 
   return (
@@ -37,20 +42,26 @@ function ProductItem(props) {
         >
           {title.slice(0, 30)}
         </strong>
-        <span>{price}₺</span>
-        <Button
-          className={"mt-[2px]"}
-          background={"primary"}
-          size={"sm"}
-          onClick={addToCart}
-        >
-          Add To Cart
-        </Button>
+        <span>{cartPage ? `${price}₺ x ${quantity}` : `${price}₺`}</span>
+        {!cartPage && (
+          <>
+            <Button
+              className={"mt-[2px]"}
+              background={"primary"}
+              size={"sm"}
+              onClick={addToCart}
+            >
+              Add To Cart
+            </Button>
+          </>
+        )}
         <Button
           className={"mt-[2px]"}
           background={"danger"}
           size={"sm"}
-          onClick={() => handleDeleteProduct(id)}
+          onClick={() => {
+            !cartPage ? handleDeleteProduct(id) : removeFromCart(id);
+          }}
         >
           Delete
         </Button>
@@ -63,9 +74,10 @@ ProductItem.propTypes = {
   imageLink: PropTypes.string,
   title: PropTypes.string,
   price: PropTypes.number,
-  id: PropTypes.number,
+  quantity: PropTypes.number,
+  id: PropTypes.number.isRequired,
   handleDeleteProduct: PropTypes.func,
-  setCart: PropTypes.func,
+  cartPage: PropTypes.bool,
 };
 
 export default ProductItem;

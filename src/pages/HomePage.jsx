@@ -7,7 +7,7 @@ const HomePage = () => {
     isLoading,
     error,
   } = useFetchData("https://jsonplaceholder.typicode.com/users");
-  
+
   return (
     <div className="home-page">
       <h1>Home Page</h1>
