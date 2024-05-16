@@ -6,6 +6,7 @@ import "react-toastify/dist/ReactToastify.css";
 import AboutPage from "./pages/AboutPage";
 import LoginPage from "./pages/LoginPage";
 import ErrorPage from "./pages/404Page";
+import CartPage from "./pages/CartPage";
 
 function App() {
   const router = createBrowserRouter([
@@ -20,6 +21,10 @@ function App() {
     {
       path: "/about",
       element: <AboutPage />,
+    },
+    {
+      path: "/cart",
+      element: <CartPage />,
     },
     {
       path: "/login",
