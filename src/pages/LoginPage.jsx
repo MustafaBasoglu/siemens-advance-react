@@ -1,7 +1,20 @@
+import { useFormik } from "formik";
+
 const LoginPage = () => {
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+      password: "",
+    },
+    onSubmit: (values) => {
+      console.log(values);
+      formik.resetForm();
+    },
+  });
+  
   return (
     <div className="login-page">
-      <form className="max-w-sm mx-auto">
+      <form className="max-w-sm mx-auto" onSubmit={formik.handleSubmit}>
         <div className="mb-5">
           <label
             htmlFor="email"
@@ -12,9 +25,12 @@ const LoginPage = () => {
           <input
             type="email"
             id="email"
-            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            name="email"
+            className={loginClasses}
             placeholder="name@flowbite.com"
             required
+            onChange={formik.handleChange}
+            value={formik.values.email}
           />
         </div>
         <div className="mb-5">
@@ -26,27 +42,13 @@ const LoginPage = () => {
           </label>
           <input
             type="password"
+            name="password"
             id="password"
-            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            className={loginClasses}
             required
+            onChange={formik.handleChange}
+            value={formik.values.password}
           />
-        </div>
-        <div className="flex items-start mb-5">
-          <div className="flex items-center h-5">
-            <input
-              id="remember"
-              type="checkbox"
-              value=""
-              className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800"
-              required
-            />
-          </div>
-          <label
-            htmlFor="remember"
-            className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-          >
-            Remember me
-          </label>
         </div>
         <button
           type="submit"
@@ -60,3 +62,6 @@ const LoginPage = () => {
 };
 
 export default LoginPage;
+
+const loginClasses =
+  "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500";
