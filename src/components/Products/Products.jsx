@@ -15,7 +15,7 @@ function Products() {
     try {
       const res = await fetch("https://dummyjson.com/products");
       const data = await res.json();
-      console.log(data);
+      setProducts(data.products);
     } catch (error) {
       console.error(error);
     } finally {
@@ -32,7 +32,7 @@ function Products() {
         {products.map((product) => (
           <ProductItem
             key={product.id}
-            imageLink={product.image}
+            imageLink={product.images[0]}
             title={product.title}
             price={product.price}
             handleDeleteProduct={handleDeleteProduct}
