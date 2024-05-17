@@ -4,11 +4,11 @@ import { CartContext } from "../../context/cart/CartContext";
 
 const Header = () => {
   const navigate = useNavigate();
-  const { cart } = useContext(CartContext);
-  console.log(cart);
+  // const { cart } = useContext(CartContext);
+  // console.log(cart);
   return (
     <header className="fixed w-full top-0">
-      <nav className="bg-white border-gray-200 px-4 lg:px-6 py-2.5 dark:bg-gray-800">
+      {/* <nav className="bg-white border-gray-200 px-4 lg:px-6 py-2.5 dark:bg-gray-800">
         <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
           <NavLink to="/" className="flex items-center">
             <img
@@ -88,7 +88,7 @@ const Header = () => {
             </ul>
           </div>
         </div>
-      </nav>
+      </nav> */}
     </header>
   );
 };
