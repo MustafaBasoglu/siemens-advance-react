@@ -1,10 +1,24 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useNavigate } from "react-router-dom";
+import { logoutUser } from "../../redux/slices/authSlice";
+import { toast } from "react-toastify";
 
 const Header = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const { cartItems } = useSelector((state) => state.cart);
-  
+  const { user } = useSelector((state) => state.auth);
+
+  function handleLogout() {
+    dispatch(logoutUser());
+    toast.warn("Çıkış işlemi başarıyla gerçekleşti!", {
+      autoClose: 1000,
+    });
+    setTimeout(() => {
+      navigate("/login");
+    }, 1500);
+  }
+
   return (
     <header className="fixed w-full top-0">
       <nav className="bg-white border-gray-200 px-4 lg:px-6 py-2.5 dark:bg-gray-800">
@@ -20,12 +34,24 @@ const Header = () => {
             </span>
           </NavLink>
           <div className="flex items-center lg:order-2">
-            <button
-              className="text-gray-800 dark:text-white hover:bg-gray-50 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800"
-              onClick={() => navigate("/login")}
-            >
-              Log in
-            </button>
+            {user ? (
+              <div className="flex gap-2 items-center">
+                <strong>{user.username}</strong>
+                <button
+                  className="text-gray-800 dark:text-white hover:bg-gray-50 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800 !bg-red-700"
+                  onClick={handleLogout}
+                >
+                  Log out
+                </button>
+              </div>
+            ) : (
+              <button
+                className="text-gray-800 dark:text-white  hover:bg-red-50 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800"
+                onClick={() => navigate("/login")}
+              >
+                Log in
+              </button>
+            )}
           </div>
           <div
             className="hidden justify-between items-center w-full lg:flex lg:w-auto lg:order-1"
