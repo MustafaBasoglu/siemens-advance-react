@@ -1,7 +1,7 @@
-import PropTypes from "prop-types";
-
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
+import { addNewProduct } from "../../redux/slices/productSlice";
 
 const initialValues = {
   title: "",
@@ -9,8 +9,9 @@ const initialValues = {
   price: 0,
 };
 
-const NewProductForm = ({ setProducts }) => {
+const NewProductForm = () => {
   const [productInputs, setProductInputs] = useState(initialValues);
+  const dispatch = useDispatch();
 
   function handleInputChange(event) {
     const { name, value } = event.target;
@@ -41,7 +42,7 @@ const NewProductForm = ({ setProducts }) => {
       price: Number(price),
     };
 
-    setProducts((prevState) => [newProduct, ...prevState]);
+    dispatch(addNewProduct(newProduct));
 
     setProductInputs(initialValues);
   }
@@ -108,10 +109,6 @@ const NewProductForm = ({ setProducts }) => {
       </form>
     </div>
   );
-};
-
-NewProductForm.propTypes = {
-  setProducts: PropTypes.func,
 };
 
 export default NewProductForm;

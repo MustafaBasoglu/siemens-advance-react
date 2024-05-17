@@ -7,17 +7,10 @@ import {
 } from "../../redux/slices/cartSlice";
 import Button from "../UI/Button";
 import "./ProductItem.css";
+import { handleDeleteProduct } from "../../redux/slices/productSlice";
 
 function ProductItem(props) {
-  const {
-    id,
-    imageLink: image,
-    title,
-    price,
-    handleDeleteProduct,
-    cartPage,
-    quantity,
-  } = props;
+  const { id, imageLink: image, title, price, cartPage, quantity } = props;
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -63,7 +56,9 @@ function ProductItem(props) {
           background={"danger"}
           size={"sm"}
           onClick={() => {
-            !cartPage ? handleDeleteProduct(id) : dispatch(removeFromCartHandler(id));
+            !cartPage
+              ? dispatch(handleDeleteProduct(id))
+              : dispatch(removeFromCartHandler(id));
           }}
         >
           Delete
@@ -79,7 +74,6 @@ ProductItem.propTypes = {
   price: PropTypes.number,
   quantity: PropTypes.number,
   id: PropTypes.number.isRequired,
-  handleDeleteProduct: PropTypes.func,
   cartPage: PropTypes.bool,
 };
 

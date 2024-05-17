@@ -1,15 +1,18 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
-export const fetchProducts = createAsyncThunk("products/fetchProducts", async () => {
-  const res = await fetch("https://dummyjson.com/products");
-  const data = await res.json();
+export const fetchProducts = createAsyncThunk(
+  "products/fetchProducts",
+  async () => {
+    const res = await fetch("https://dummyjson.com/products");
+    const data = await res.json();
 
-  if (!res.ok) {
-    throw new Error("Something went wrong!");
+    if (!res.ok) {
+      throw new Error("Something went wrong!");
+    }
+
+    return data ? data.products : [];
   }
-
-  return data ? data.products : [];
-});
+);
 
 const productSlice = createSlice({
   name: "products",
@@ -19,7 +22,14 @@ const productSlice = createSlice({
     error: null,
   },
   reducers: {
-    addNewProduct: () => {},
+    addNewProduct: (state, action) => {
+      state.productData = [action.payload, ...state.productData];
+    },
+    handleDeleteProduct: (state, action) => {
+      state.productData = state.productData.filter(
+        (item) => item.id !== action.payload
+      );
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -36,5 +46,7 @@ const productSlice = createSlice({
       });
   },
 });
+
+export const { addNewProduct, handleDeleteProduct } = productSlice.actions;
 
 export default productSlice;
