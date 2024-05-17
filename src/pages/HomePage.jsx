@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import MyElement from "../components/MyElement";
 import Button from "../components/UI/Button";
 
@@ -7,9 +7,9 @@ const HomePage = () => {
 
   console.log("HomePage çalıştı!");
 
-  const toggleParagraphHandler = () => {
-    setToggleParagraph(!toggleParagraph);
-  };
+  const toggleParagraphHandler = useCallback(() => {
+    setToggleParagraph((prevState) => !prevState);
+  }, []);
 
   return (
     <div className="home-page">
