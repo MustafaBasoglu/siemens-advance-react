@@ -4,7 +4,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 const Header = () => {
   const navigate = useNavigate();
   const { cartItems } = useSelector((state) => state.cart);
-  console.log(cartItems);
+  
   return (
     <header className="fixed w-full top-0">
       <nav className="bg-white border-gray-200 px-4 lg:px-6 py-2.5 dark:bg-gray-800">
