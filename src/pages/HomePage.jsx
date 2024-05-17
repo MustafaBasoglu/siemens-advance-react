@@ -1,32 +1,24 @@
-import { useCallback, useState } from "react";
-import MyElement from "../components/MyElement";
+import { useCallback, useMemo, useState } from "react";
 import Button from "../components/UI/Button";
+import List from "../components/List";
 
 const HomePage = () => {
-  const [toggleParagraph, setToggleParagraph] = useState(false);
-  const [toggleAllow, setToggleAllow] = useState(false);
+  const [title, setTitle] = useState("Title");
 
   console.log("HomePage çalıştı!");
 
-  const toggleParagraphHandler = useCallback(() => {
-    if(toggleAllow){
-      setToggleParagraph((prevState) => !prevState);
-    }
-  }, [toggleAllow]);
+  const changeTitleHandler = useCallback(() => {
+    setTitle("Title Changed!");
+  }, []);
 
-  const toggleAllowHandler = () =>{
-    setToggleAllow(true)
-  }
+  const listItems = useMemo(() => [1, 2, 3, 4, 5], []);
 
   return (
     <div className="home-page">
       <h1>Home Page</h1>
-      <MyElement show={toggleParagraph} />
-      <br />
-      <Button onClick={toggleAllowHandler}>Toggle Allow</Button>
-      <br />
-      <br />
-      <Button onClick={toggleParagraphHandler}>Toggle Paragraph</Button>
+      <p>{title}</p>
+      <Button onClick={changeTitleHandler}>Title Change</Button>
+      <List items={listItems} />
     </div>
   );
 };
