@@ -9,6 +9,8 @@ import ErrorPage from "./pages/404Page";
 import CartPage from "./pages/CartPage";
 import MainLayout from "./layouts/MainLayout";
 import ProductDetailsPage from "./pages/ProductDetailsPage";
+import AdminPage from "./pages/AdminPage";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
   const router = createBrowserRouter([
@@ -20,6 +22,14 @@ function App() {
         {
           path: "/",
           element: <HomePage />,
+        },
+        {
+          path: "/admin",
+          element: (
+            <ProtectedRoute allowedRoles={["admin"]}>
+              <AdminPage />
+            </ProtectedRoute>
+          ),
         },
         {
           path: "/products",

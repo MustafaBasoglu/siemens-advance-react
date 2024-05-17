@@ -27,6 +27,7 @@ const LoginPage = () => {
         id: 1,
         email: values.email,
         username: "eminbasbayan",
+        role: "admin",
       };
       dispatch(loginUser({ user }));
       toast.success(

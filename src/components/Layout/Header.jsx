@@ -91,6 +91,16 @@ const Header = () => {
               </li>
               <li>
                 <NavLink
+                  to="/admin"
+                  className={({ isActive }) =>
+                    isActive ? `${linkClasses} !text-white` : linkClasses
+                  }
+                >
+                  Admin
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
                   to="/cart"
                   className={({ isActive }) =>
                     isActive ? `${linkClasses} !text-white` : linkClasses
