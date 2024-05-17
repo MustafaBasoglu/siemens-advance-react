@@ -1,3 +1,4 @@
+import ScrollToTop from "../components/ScrollToTop";
 import MainLayout from "../layouts/MainLayout";
 import ErrorPage from "../pages/404Page";
 import AboutPage from "../pages/AboutPage";
@@ -10,7 +11,11 @@ import ProductsPage from "../pages/ProductsPage";
 export const mainRoutes = [
   {
     path: "/",
-    element: <MainLayout />,
+    element: (
+      <ScrollToTop>
+        <MainLayout />
+      </ScrollToTop>
+    ),
     errorElement: <ErrorPage />,
     children: [
       {
