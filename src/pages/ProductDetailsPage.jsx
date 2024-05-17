@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Skeleton from "../components/Skeleton";
+import { useDispatch } from "react-redux";
+import { addToCartHandler } from "../redux/slices/cartSlice";
 
 const ProductDetailsPage = () => {
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const params = useParams();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     fetch(`https://dummyjson.com/products/${params.id}`)
@@ -34,7 +37,18 @@ const ProductDetailsPage = () => {
           <div className="mt-4">
             <span className=" font-bold text-2xl">${product.price}</span>
           </div>
-          <button className="mt-6 px-6 py-3 bg-blue-600 text-white text-sm font-bold uppercase rounded">
+          <button
+            className="mt-6 px-6 py-3 bg-blue-600 text-white text-sm font-bold uppercase rounded"
+            onClick={() =>
+              dispatch(
+                addToCartHandler({
+                  ...product,
+                  quantity: 1,
+                  image: product.images[0],
+                })
+              )
+            }
+          >
             Add to Cart
           </button>
         </div>

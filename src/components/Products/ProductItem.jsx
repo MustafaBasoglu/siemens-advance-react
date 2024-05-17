@@ -1,9 +1,12 @@
 import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import {
+  addToCartHandler,
+  removeFromCartHandler,
+} from "../../redux/slices/cartSlice";
 import Button from "../UI/Button";
 import "./ProductItem.css";
-import { useContext } from "react";
-import { CartContext } from "../../context/cart/CartContext";
 
 function ProductItem(props) {
   const {
@@ -16,8 +19,7 @@ function ProductItem(props) {
     quantity,
   } = props;
   const navigate = useNavigate();
-  const { addToCartHandler } = useContext(CartContext);
-  const { removeFromCart } = useContext(CartContext);
+  const dispatch = useDispatch();
 
   function addToCart() {
     const cartItem = {
@@ -25,9 +27,10 @@ function ProductItem(props) {
       image,
       title,
       price,
+      quantity: 1,
     };
 
-    addToCartHandler(cartItem);
+    dispatch(addToCartHandler(cartItem));
   }
 
   return (
@@ -60,7 +63,7 @@ function ProductItem(props) {
           background={"danger"}
           size={"sm"}
           onClick={() => {
-            !cartPage ? handleDeleteProduct(id) : removeFromCart(id);
+            !cartPage ? handleDeleteProduct(id) : dispatch(removeFromCartHandler(id));
           }}
         >
           Delete
