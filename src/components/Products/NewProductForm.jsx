@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { toast } from "react-toastify";
 import { addNewProduct } from "../../redux/slices/productSlice";
+import ErrorModal from "../UI/ErrorModal";
 
 const initialValues = {
   title: "",
@@ -11,6 +11,7 @@ const initialValues = {
 
 const NewProductForm = () => {
   const [productInputs, setProductInputs] = useState(initialValues);
+  const [isShowError, setIsShowError] = useState(false);
   const dispatch = useDispatch();
 
   function handleInputChange(event) {
@@ -31,7 +32,7 @@ const NewProductForm = () => {
     );
 
     if (!isFormValid) {
-      toast.warn("Bu inputlar dolu olmalıdır!");
+      setIsShowError(true);
       return;
     }
 
@@ -107,6 +108,11 @@ const NewProductForm = () => {
           </button>
         </div>
       </form>
+      <ErrorModal
+        isShowError={isShowError}
+        setIsShowError={setIsShowError}
+        message="Inputlar dolu olmalı!"
+      />
     </div>
   );
 };
