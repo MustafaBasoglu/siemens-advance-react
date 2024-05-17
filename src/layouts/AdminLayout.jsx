@@ -8,6 +8,12 @@ const AdminLayout = () => {
           <h1 className="text-2xl font-semibold">Admin Panel</h1>
         </div>
         <nav className="mt-10">
+          <Link
+            to={"/"}
+            className="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700 hover:text-white"
+          >
+            Home
+          </Link>
           <a
             href="#"
             className="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700 hover:text-white"

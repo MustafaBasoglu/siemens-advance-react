@@ -1,3 +1,4 @@
+import ProtectedRoute from "../components/ProtectedRoute";
 import AdminLayout from "../layouts/AdminLayout";
 import ErrorPage from "../pages/404Page";
 import AdminPage from "../pages/admin/AdminPage";
@@ -7,7 +8,11 @@ import UsersPage from "../pages/admin/UsersPage";
 export const adminRoutes = [
   {
     path: "/admin",
-    element: <AdminLayout />,
+    element: (
+      <ProtectedRoute allowedRoles={["admin"]}>
+        <AdminLayout />
+      </ProtectedRoute>
+    ),
     errorElement: <ErrorPage />,
     children: [
       {

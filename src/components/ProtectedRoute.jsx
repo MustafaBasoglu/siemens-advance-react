@@ -1,13 +1,13 @@
 import PropTypes from "prop-types";
 import { useSelector } from "react-redux";
-import { Navigate, Outlet } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 
-const ProtectedRoute = ({ allowedRoles }) => {
+const ProtectedRoute = ({ allowedRoles, children }) => {
   const user = useSelector((state) => state.auth.user);
 
   if (user) {
     if (allowedRoles.includes(user.role)) {
-      return <Outlet />;
+      return children;
     } else {
       return <Navigate to={"/"} />;
     }
@@ -18,6 +18,7 @@ const ProtectedRoute = ({ allowedRoles }) => {
 
 ProtectedRoute.propTypes = {
   allowedRoles: PropTypes.array.isRequired,
+  children: PropTypes.array.node,
 };
 
 export default ProtectedRoute;
